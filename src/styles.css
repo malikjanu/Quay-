@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", "Iowan Old Style", Palatino, Georgia, serif;
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+
+  --color-bg: #f3eee6;
+  --color-surface: #fffdf8;
+  --color-fg: #1c1712;
+  --color-muted: #6f665d;
+  --color-border: #e4dacd;
+  --color-accent: #b8431f;
+  --color-accent-hover: #9a3518;
+  --color-accent-fg: #fff8f4;
+  --color-accent-soft: #f6e6d8;
+  --color-accent-on-dark: #f0a07a;
+  --color-on-inverse: #fff8f4;
+  --color-on-inverse-muted: #d4c8ba;
+
+  --shadow-card:
+    0 0 0 1px rgb(28 23 18 / 0.08), 0 1px 2px -1px rgb(28 23 18 / 0.06),
+    0 12px 32px -16px rgb(28 23 18 / 0.18);
+  --shadow-card-hover:
+    0 0 0 1px rgb(28 23 18 / 0.12), 0 1px 2px -1px rgb(28 23 18 / 0.08),
+    0 16px 36px -14px rgb(28 23 18 / 0.22);
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+    background: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100%;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-accent-fg);
+  }
+}
+
+.press {
+  transition-property: scale, background-color, color, box-shadow;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+
+.press:active:not(:disabled) {
+  scale: 0.96;
+}
+
+.rise {
+  animation: rise 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rise-2 {
+  animation-delay: 80ms;
+}
+
+.rise-3 {
+  animation-delay: 160ms;
+}
+
+.rise-4 {
+  animation-delay: 240ms;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .rise,
+  .rise-2,
+  .rise-3,
+  .rise-4 {
+    animation: none;
+  }
+
+  .press:active:not(:disabled) {
+    scale: 1;
+  }
+}
